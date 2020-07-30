@@ -1,0 +1,106 @@
+.widget-explore-facilities {
+
+  .explore-facilities-main-slider {
+
+    .slick-list {
+      @include breakpoint(large) {
+        overflow: visible;
+      }
+    }
+
+    &-slide {
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba($black, .3);
+      }
+
+      &-inner {
+        min-height: 100vh;
+        position: relative;
+        z-index: 2;
+        @include breakpoint(large) {
+          padding-top: 50px;
+          padding-left: 50px;
+          padding-bottom: 50px;
+        }
+
+        &-title {
+          line-height: 1;
+          margin-bottom: 0;
+          @include breakpoint(large) {
+            font-size: 62px;
+          }
+        }
+
+        &-address {
+          @include breakpoint(large) {
+            font-size: 18px;
+          }
+        }
+
+        .separator {
+          border-left: 2px solid $primary-color;
+        }
+
+        .facility-excerpt {
+          margin-top: $global-margin;
+          padding: 2rem 2rem 0;
+          background: $white;
+          @include breakpoint(large) {
+            transform: translateX(50%);
+          }
+
+          &-inner {
+
+          }
+        }
+      }
+    }
+  }
+
+  .explore-facilities-controls {
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+    .menu {
+      margin-top: $global-margin;
+      margin-bottom: 35px;
+
+      > li {
+        > a {
+          color: $black;
+          opacity: .4;
+          transition: opacity .2s ease-in-out;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          &:after {
+            content: "";
+            height: 2px;
+            width: 0;
+            margin-left: 10px;
+            background: $primary-color;
+            display: inline-block;
+            transition: width .2s ease-in-out;
+          }
+
+          &.active, &:hover {
+            opacity: 1;
+            &:after {
+              width: 25px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

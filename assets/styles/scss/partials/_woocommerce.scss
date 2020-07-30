@@ -1,0 +1,98 @@
+// GLOBAL
+.woocommerce #respond input#submit.alt,
+.woocommerce a.button.alt, .woocommerce button.button.alt,
+.woocommerce input.button.alt {
+  background-color: $primary-color;
+  &:hover {
+    background-color: darken($primary-color, 15%);
+  }
+}
+
+.woocommerce-page {
+  .woocommerce {
+    @extend .grid-container;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    @include breakpoint(large) {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+  }
+}
+
+
+// CART
+.woocommerce-cart {
+  .woocommerce {
+    .return-to-shop {
+      display: none;
+    }
+  }
+}
+
+// CHECKOUT
+
+// ATTENDEES
+body.page-tribe-attendee-registration {
+  .tribe-common {
+    .tribe-tickets__registration__summary {
+      background: $light-gray;
+      padding: $global-padding;
+
+      .tribe-tickets__registration__description {
+
+      }
+
+      .tribe-tickets__registration__title {
+
+      }
+    }
+
+    .tribe-tickets__registration__grid {
+      border-top: 0 !important;
+      padding-top: 0 !important;
+    }
+
+    .tribe-tickets__mini-cart {
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
+
+      .sticky {
+        background: $light-gray;
+        padding: $global-padding;
+      }
+    }
+
+    .tribe-tickets__item__attendee__fields {
+      .tribe-ticket {
+        border-bottom: 1px solid $medium-gray;
+        margin-bottom: 24px;
+
+        h4 {
+          @extend .h4;
+        }
+      }
+    }
+
+    .tribe-common-form-control-text__input {
+      border: 1px solid $black;
+      padding-left: $global-padding;
+    }
+
+    .tribe_horizontal_datepicker__field_group {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      > div {
+        flex: 1;
+
+        &:nth-child(2) {
+          margin-left: $global-margin;
+          margin-right: $global-margin;
+        }
+      }
+    }
+  }
+}

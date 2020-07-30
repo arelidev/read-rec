@@ -1,0 +1,39 @@
+.widget-announcements {
+
+  .single-announcement {
+    margin-bottom: $global-margin * 2 ;
+    padding-bottom: $global-padding;
+    &:not(:last-child) {
+      border-bottom: 1px solid $medium-gray;
+    }
+
+    &-date {
+      background-color: $light-gray;
+      border-radius: 4px;
+      width: 64px;
+      margin-right: 10px;
+
+      .date-month {
+        border-radius: 4px;
+        background-color: $secondary-color;
+        text-transform: uppercase;
+        font-size: $small-font-size;
+        line-height: 1.8;
+      }
+
+      .date-day {
+        font-size: 26px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+    }
+
+    &-title {
+
+    }
+
+    &-content {
+
+    }
+  }
+}

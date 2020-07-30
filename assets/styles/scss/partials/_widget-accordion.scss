@@ -1,0 +1,31 @@
+.accordion-widget {
+  background: transparent;
+
+  .accordion-item {
+    box-shadow: 0 0 20px rgba($black, .1);;
+    margin-bottom: 35px;
+    border-radius: 0 0 $global-radius $global-radius;
+    border-top: 7px solid rgba($primary-color, .24);
+    background: $white;
+
+    &.is-active {
+      border-top-color: rgba($primary-color, 1);
+    }
+
+    .accordion-title {
+      border-radius: 0;
+      border: none;
+      font-size: 22px;
+
+      &:before {
+        font-size: 24px;
+        transform: translateY(-50%);
+        margin-top: -4px;
+      }
+    }
+
+    .accordion-content {
+      border: none;
+    }
+  }
+}
