@@ -45,7 +45,10 @@
 
 			<div class="off-canvas-content" data-off-canvas-content>
 
-				<header class="header <?= ( get_field( 'header_overlay_menu' ) == true ) ? 'overlay-menu' : 'standard-menu'; ?>" role="banner">
+				<header class="header
+				<?= ( get_field( 'header_overlay_menu' ) == true || is_singular( 'facilities' ) )
+                    ? 'overlay-menu' : 'standard-menu'; ?>"
+                        role="banner">
 
 					 <!-- This navs will be applied to the topbar, above all content
 						  To see additional nav styles, visit the /parts directory -->

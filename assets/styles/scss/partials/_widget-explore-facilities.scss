@@ -56,7 +56,7 @@
           padding: 2rem 2rem 0;
           background: $white;
           @include breakpoint(large) {
-            transform: translateX(50%);
+            transform: translateX(35%);
           }
 
           &-inner {

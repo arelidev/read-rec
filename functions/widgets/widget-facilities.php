@@ -20,7 +20,7 @@ function widget_facilities_grid( $atts, $content = null ) {
 	);
 	$loop = new WP_Query( $args );
 	?>
-    <div class="grid-x widget-event-categories <?= $atts['el_class']; ?>">
+    <div class="grid-x widget-event-categories align-center <?= $atts['el_class']; ?>">
 		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
             <div class="small-6 medium-4 large-3 cell widget-event-categories-single-category">
                 <div class="widget-event-categories-single-category-inner">
