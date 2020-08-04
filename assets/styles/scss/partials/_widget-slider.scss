@@ -76,15 +76,15 @@
   }
 
   .slick-custom {
-    background: $white;
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    cursor: pointer;
-    opacity: .8;
-    transition: opacity .2s ease-in-out;
-    &:after {
-      opacity: 1;
+    i {
+      background: $white;
+      border-radius: 50%;
+      height: 30px;
+      width: 30px;
+      line-height: 30px;
+      cursor: pointer;
+      opacity: .8;
+      transition: opacity .2s ease-in-out;
     }
   }
 }
