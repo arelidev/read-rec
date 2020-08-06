@@ -70,7 +70,7 @@ function widget_explore_facilities( $atts, $content = null ) {
                 </div>
             </div>
         </div>
-        <div class="show-for-large small-12 medium-12 large-4 cell explore-facilities-controls" data-sticky-container>
+        <div class="show-for-large medium-order-2 small-12 medium-12 large-4 cell explore-facilities-controls" data-sticky-container>
             <div class="sticky" data-sticky data-anchor="facilities-main">
                 <h2 class="h1 text-right"><?= $atts['title']; ?></h2>
                 <ul class="menu vertical text-right">
