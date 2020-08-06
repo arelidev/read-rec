@@ -83,13 +83,9 @@ require_once( get_template_directory() . '/functions/woocommerce.php' );
  *
  * @return string The translated text or the custom text.
  */
-
-add_filter( 'gettext_with_context', 'tribe_change_get_tickets', 20, 4 );
 function tribe_change_get_tickets( $translation, $text, $context = "", $domain ) {
 
-	if ( $domain != 'default'
-	     && strpos( $domain, 'event-' ) !== 0
-	) {
+	if ( $domain != 'default' && strpos( $domain, 'event-' ) !== 0 ) {
 		return $translation;
 	}
 
@@ -107,3 +103,11 @@ function tribe_change_get_tickets( $translation, $text, $context = "", $domain )
 
 	return $ticket_text[ $text ];
 }
+
+add_filter( 'gettext_with_context', 'tribe_change_get_tickets', 20, 4 );
+
+function filter_ticket_label_plural() {
+	return 'Participants';
+}
+
+add_filter( 'tribe_get_ticket_label_plural', 'filter_ticket_label_plural' );

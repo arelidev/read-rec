@@ -62,7 +62,7 @@ $classes        = [
 	</div>
 
 	<h1 class="tribe-common-h2 tribe-common-h1--min-medium tribe-common-h--alt tribe-tickets__registration__page-title">
-		<?php echo esc_html( tribe( 'tickets.attendee_registration.template' )->get_page_title() ); ?>
+		<?= __( 'Participant Information', 'read-rec' ); ?>
 	</h1>
 	<form
 		method="post"
