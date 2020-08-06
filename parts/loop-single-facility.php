@@ -4,15 +4,17 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( '' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+<article id="post-<?php the_ID(); ?>" <?php post_class( '' ); ?> role="article" itemscope
+         itemtype="http://schema.org/BlogPosting">
 
-    <header class="article-header grid-y grid-padding-y" style="height: 100%; background-image: url(<?= get_the_post_thumbnail_url( get_the_ID(), 'full' ); ?>">
+    <header class="article-header grid-y grid-padding-y"
+            style="height: 100%; background-image: url(<?= get_the_post_thumbnail_url( get_the_ID(), 'full' ); ?>">
         <div class="cell">
             <div class="header-spacer"></div>
         </div>
         <div class="cell">
             <h1 class="entry-title single-title text-color-white" itemprop="headline">
-                <?php the_title(); ?>
+				<?php the_title(); ?>
             </h1>
         </div>
         <div class="auto cell separator"></div>
@@ -63,12 +65,13 @@
             </div>
 
             <div class="facility-amenities">
-                <h5 class="font-family-body"><b><?= __( 'Amenities', 'read-rec' ); ?></b></h5>
 				<?php if ( have_rows( 'facility_amenities' ) ): ?>
+                    <h5 class="font-family-body"><b><?= __( 'Amenities', 'read-rec' ); ?></b></h5>
                     <ul class="facility-amenities-list menu vertical">
 						<?php while ( have_rows( 'facility_amenities' ) ) : the_row(); ?>
                             <li>
-                                <p><?php the_sub_field( 'icon' ); ?> <b><span class="text-color-dark-gray"><?php the_sub_field( 'Title' ); ?></span></b></p>
+                                <p><?php the_sub_field( 'icon' ); ?> <b><span class="text-color-dark-gray"><?php the_sub_field( 'Title' ); ?></span></b>
+                                </p>
                             </li>
 						<?php endwhile; ?>
                     </ul>
@@ -76,19 +79,21 @@
             </div>
 
             <div class="facility-content">
-                <h5 class="font-family-body"><b><?= __( 'Additional Information', 'read-rec' ); ?></b></h5>
-                <div class="text-color-dark-gray">
-					<?php the_content(); ?>
-                </div>
+				<?php if ( ! empty( get_the_content() ) ) : ?>
+                    <h5 class="font-family-body"><b><?= __( 'Additional Information', 'read-rec' ); ?></b></h5>
+                    <div class="text-color-dark-gray">
+						<?php the_content(); ?>
+                    </div>
+				<?php endif; ?>
             </div>
         </div>
     </section> <!-- end article section -->
 
     <footer class="article-footer">
-	    <?php wp_link_pages( array(
-		    'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'jointswp' ),
-		    'after'  => '</div>'
-	    ) ); ?>
+		<?php wp_link_pages( array(
+			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'jointswp' ),
+			'after'  => '</div>'
+		) ); ?>
         <p class="tags"><?php the_tags( '<span class="tags-title">' . __( 'Tags:', 'jointswp' ) . '</span> ', ', ', '' ); ?></p>
 
 		<?php

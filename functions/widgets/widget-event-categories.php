@@ -26,7 +26,7 @@ function widget_event_categories( $atts, $content = null ) {
             <div class="small-6 medium-4 large-3 cell widget-event-categories-single-category">
                 <div class="widget-event-categories-single-category-inner">
                     <a href="<?= get_term_link( $category->term_id ); ?>">
-						<?= wp_get_attachment_image( get_field( 'thumbnail', $category->taxonomy . '_' . $category->term_id ), 'post-thumbnail' ); ?>
+						<?= wp_get_attachment_image( get_field( 'thumbnail', $category->taxonomy . '_' . $category->term_id ), 'event-category' ); ?>
                         <div class="widget-event-categories-single-category-inner-title text-color-white text-right">
                             <b><?= $category->name; ?></b>
                         </div>

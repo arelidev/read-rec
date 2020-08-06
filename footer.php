@@ -16,7 +16,7 @@
 			<?php dynamic_sidebar( 'footer1' ); ?>
         </div>
 
-        <div class="small-12 medium-4 large-3 large-offset-1 cell">
+        <div class="small-12 medium-3 large-3 medium-offset-1 cell">
             <h5 class="font-family-body text-color-white">
 				<?= __( 'About Us', 'read-rec' ); ?>
             </h5>

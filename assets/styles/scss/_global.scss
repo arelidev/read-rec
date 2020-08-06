@@ -98,25 +98,6 @@ POSTS & CONTENT STYLES
 		}
 	}
 
-	.social-icons-lists {
-		margin: 0;
-
-		.social-icons-list-item {
-			.social-icon {
-				.socicon {
-					color: $black !important;
-					&:hover {
-						color: $dark-gray !important;
-					}
-				}
-
-				.social-icons-list-label {
-					@extend .show-for-sr;
-				}
-			}
-		}
-	}
-
 	.button {
 		margin-bottom: 0;
 	}
@@ -162,6 +143,28 @@ POSTS & CONTENT STYLES
 			&:hover {
 				border-color: $light-gray;
 				color: $light-gray;
+			}
+		}
+	}
+}
+
+.social-icons-lists {
+	margin: 0;
+	@include breakpoint(medium down) {
+		text-align: center;
+	}
+
+	.social-icons-list-item {
+		.social-icon {
+			.socicon {
+				color: $black !important;
+				&:hover {
+					color: $dark-gray !important;
+				}
+			}
+
+			.social-icons-list-label {
+				@extend .show-for-sr;
 			}
 		}
 	}
@@ -590,6 +593,10 @@ FOOTER STYLES
 	}
 
 	#footer-nav {
+		@include breakpoint(small only) {
+			margin-bottom: 1.5rem;
+		}
+
 		> li {
 			> a {
 				padding-left: 0;
@@ -666,6 +673,18 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 	form {
 		.wpcf7-response-output {
 			@include callout-base();
+		}
+
+		.wpcf7-validation-errors {
+			@include callout-style($warning-color);
+		}
+
+		.wpcf7-mail-sent-ok {
+			@include callout-style($success-color);
+		}
+
+		.wpcf7-mail-sent-ng {
+			@include callout-style($alert-color);
 		}
 	}
 }

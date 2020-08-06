@@ -26,13 +26,12 @@
       &-inner {
         position: relative;
         z-index: 2;
-        @include breakpoint(medium) {
-          min-height: 100vh;
-        }
+        min-height: 80vh;
         @include breakpoint(large) {
           padding-top: 50px;
           padding-left: 50px;
           padding-bottom: 50px;
+          min-height: 100vh;
         }
 
         &-title {
@@ -105,6 +104,20 @@
           }
         }
       }
+    }
+  }
+
+  .slick-custom {
+    i {
+      background: $white;
+      border-radius: 50%;
+      height: 30px;
+      width: 30px;
+      line-height: 30px;
+      cursor: pointer;
+      opacity: .8;
+      transition: opacity .2s ease-in-out;
+      box-shadow: 0 4px 10px rgba($black, .35);
     }
   }
 }

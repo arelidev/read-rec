@@ -4,7 +4,9 @@ jQuery(document).ready(function ($) {
         infinite: true,
         speed: 500,
         fade: true,
-        cssEase: 'linear'
+        cssEase: 'linear',
+        prevArrow: ".widget-explore-facilities-main-slider-nav-prev",
+        nextArrow: ".widget-explore-facilities-main-slider-nav-next",
     });
 
     $('a[data-slide]').on('click', function(e) {

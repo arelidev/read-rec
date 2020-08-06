@@ -24,7 +24,7 @@ $event_id = get_the_ID();
 
 <div id="tribe-events-content" class="tribe-events-single grid-x grid-padding-x grid-margin-y">
 
-    <div class="small-12 medium-12 large-12 cell">
+    <div class="small-order-1 medium-order-1 small-12 medium-12 large-12 cell">
         <!-- Notices -->
 		<?php tribe_the_notices() ?>
 
@@ -42,28 +42,28 @@ $event_id = get_the_ID();
         <!-- #tribe-events-header -->
     </div>
 
-    <div class="small-12 medium-6 large-5 cell">
+    <div class="small-order-3 medium-order-2 small-12 medium-6 large-5 cell">
         <!-- Event featured image, but exclude link -->
 		<?= tribe_event_featured_image( $event_id, 'full', false ); ?>
 
         <!-- Event content -->
 	    <?php do_action( 'tribe_events_single_event_before_the_content' ) ?>
         <div class="tribe-events-single-event-description tribe-events-content">
-            <h4 class="font-family-body"><b><?= __( 'Details', 'read-rec' ); ?></b></h4>
+            <h4 class="font-family-body hide"><b><?= __( 'Details', 'read-rec' ); ?></b></h4>
             <div class="text-color-dark-gray"><?php the_content(); ?></div>
         </div>
     </div>
 
-    <div class="small-12 medium-6 large-6 large-offset-1 cell">
+    <div class="small-order-2 medium-order-3 small-12 medium-6 large-6 large-offset-1 cell">
         <div class="grid-x grid-padding-x align-middle">
-            <div class="small-12 medium-6 large-6 cell">
+            <div class="small-6 medium-6 large-6 cell">
                 <p class="tribe-events-back">
                     <a href="<?= esc_url( tribe_get_events_link() ); ?>">
 			            <?php printf( '&laquo; ' . esc_html_x( 'All %s', '%s Events plural label', 'the-events-calendar' ), $events_label_plural ); ?>
                     </a>
                 </p>
             </div>
-            <div class="small-12 medium-6 large-6 cell">
+            <div class="small-6 medium-6 large-6 cell">
                 <div class="tribe-events-schedule tribe-clearfix">
 		            <?php // echo tribe_events_event_schedule_details( $event_id, '<h2>', '</h2>' ); ?>
 		            <?php if ( tribe_get_cost() ) : ?>

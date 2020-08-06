@@ -13,29 +13,35 @@
 				<?php if ( has_custom_logo() ) : ?>
 					<?php the_custom_logo(); ?>
 				<?php else : ?>
-                    <a href="<?php echo home_url(); ?>"><?php bloginfo( 'name' ); ?></a>
+                    <a href="<?= home_url(); ?>"><?php bloginfo( 'name' ); ?></a>
 				<?php endif; ?>
             </li>
         </ul>
     </div>
-    <div class="auto cell show-for-medium">
+    <div class="auto cell show-for-large">
 		<?php joints_top_nav(); ?>
     </div>
     <div class="shrink cell show-for-large">
 		<?= do_shortcode( "[social_icons_group id='" . get_field( 'header_social_icons_shortcode', 'option' ) . "']" ); ?>
     </div>
     <div class="shrink cell show-for-large">
-	    <?php if ( is_user_logged_in() ) { ?>
-            <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>" title="<?php _e('My Account','woothemes'); ?>" class="button hollow"><?php _e('My Account','woothemes'); ?></a>
-	    <?php }
-	    else { ?>
-            <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>" title="<?php _e('Login / Register','woothemes'); ?>" class="button hollow"><?php _e('Login / Register','woothemes'); ?></a>
-	    <?php } ?>
+		<?php if ( is_user_logged_in() ) : ?>
+            <a href="<?= get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ); ?>"
+               title="<?= __( 'My Account', 'woothemes' ); ?>"
+               class="button hollow"><?= __( 'My Account', 'woothemes' ); ?></a>
+		<?php else : ?>
+            <a href="<?= get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ); ?>"
+               title="<?= __( 'Login / Register', 'woothemes' ); ?>"
+               class="button hollow"><?= __( 'Login / Register', 'woothemes' ); ?></a>
+		<?php endif; ?>
     </div>
-    <div class="auto cell show-for-small-only">
-        <ul class="menu">
-            <!-- <li><button class="menu-icon" type="button" data-toggle="off-canvas"></button></li> -->
-            <li><a data-toggle="off-canvas"><?php _e( 'Menu', 'jointswp' ); ?></a></li>
+    <div class="auto cell hide-for-large">
+        <ul class="menu align-right">
+            <li>
+                <button class="menu-icon
+                <?= ( get_field( 'header_overlay_menu' ) == false || is_singular( 'facilities' ) == false ) ? 'dark' : ''; ?>"
+                        type="button" data-toggle="off-canvas"></button>
+            </li>
         </ul>
     </div>
 </div>
