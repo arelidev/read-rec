@@ -3,10 +3,13 @@
 
   .accordion-item {
     box-shadow: 0 0 20px rgba($black, .1);;
-    margin-bottom: 35px;
+    margin-bottom: $global-margin;
     border-radius: 0 0 $global-radius $global-radius;
     border-top: 7px solid rgba($primary-color, .24);
     background: $white;
+    @include breakpoint(medium) {
+      margin-bottom: 35px;
+    }
 
     &.is-active {
       border-top-color: rgba($primary-color, 1);
@@ -15,7 +18,9 @@
     .accordion-title {
       border-radius: 0;
       border: none;
-      font-size: 22px;
+      @include breakpoint(medium) {
+        font-size: 22px;
+      }
 
       &:before {
         font-size: 24px;

@@ -64,7 +64,7 @@
     <div class="lower-footer grid-container grid-x grid-padding-x">
 
         <div class="small-12 medium-6 large-6 cell">
-            <p class="source-org copyright text-color-medium-gray"><small>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>.</small></p>
+            <p class="source-org copyright text-color-medium-gray text-center medium-text-left"><small>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>.</small></p>
         </div>
 
         <div class="small-12 medium-6 large-6 cell">

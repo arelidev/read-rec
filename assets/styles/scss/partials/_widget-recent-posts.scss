@@ -3,8 +3,14 @@
   .single-recent-post {
     margin-bottom: $global-margin * 2 ;
 
+    img {
+      margin-bottom: $global-margin;
+    }
+
     &-meta {
-      margin-bottom: 25px;
+      @include breakpoint(medium) {
+        margin-bottom: 25px;
+      }
 
       .categories {
         text-transform: uppercase;

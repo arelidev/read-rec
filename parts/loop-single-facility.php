@@ -68,7 +68,7 @@
                     <ul class="facility-amenities-list menu vertical">
 						<?php while ( have_rows( 'facility_amenities' ) ) : the_row(); ?>
                             <li>
-                                <p><?php the_sub_field( 'icon' ); ?> <b><?php the_sub_field( 'title' ); ?></b></p>
+                                <p><?php the_sub_field( 'icon' ); ?> <b><span class="text-color-dark-gray"><?php the_sub_field( 'Title' ); ?></span></b></p>
                             </li>
 						<?php endwhile; ?>
                     </ul>

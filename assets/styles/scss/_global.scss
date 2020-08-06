@@ -617,7 +617,10 @@ FOOTER STYLES
 	}
 
 	#footer-links {
-		justify-content: flex-end;
+		justify-content: center;
+		@include breakpoint(medium) {
+			justify-content: flex-end;
+		}
 		> li {
 			> a {
 				color: $white;

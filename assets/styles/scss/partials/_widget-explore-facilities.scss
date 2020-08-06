@@ -24,9 +24,11 @@
       }
 
       &-inner {
-        min-height: 100vh;
         position: relative;
         z-index: 2;
+        @include breakpoint(medium) {
+          min-height: 100vh;
+        }
         @include breakpoint(large) {
           padding-top: 50px;
           padding-left: 50px;
@@ -52,9 +54,11 @@
         }
 
         .facility-excerpt {
-          margin-top: $global-margin;
           padding: 2rem 2rem 0;
           background: $white;
+          @include breakpoint(medium) {
+            margin-top: $global-margin;
+          }
           @include breakpoint(large) {
             transform: translateX(35%);
           }

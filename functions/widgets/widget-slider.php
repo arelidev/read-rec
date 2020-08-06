@@ -51,7 +51,7 @@ function widget_slider( $atts, $content = null ) {
                 </div>
 
                 <div class="grid-x grid-padding-x align-bottom">
-                    <div class="auto cell">
+                    <div class="small-12 medium-auto cell show-for-medium">
                         <div class="widget-slider-controls grid-x grid-padding-x">
 							<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
 								<?php if ( have_rows( 'slides' ) ): $i=0; while ( have_rows( 'slides' ) ) : the_row(); ?>
@@ -70,12 +70,12 @@ function widget_slider( $atts, $content = null ) {
 							<?php endwhile; ?>
                         </div>
                     </div>
-                    <div class="shrink cell">
+                    <div class="small-6 medium-shrink cell text-center">
                         <button class="slick-prev-custom slick-custom widget-slider-nav-prev">
                             <i class="far fa-chevron-left fa-lg"></i>
                         </button>
                     </div>
-                    <div class="shrink cell">
+                    <div class="small-6 medium-shrink cell text-center">
                         <button class="slick-next-custom slick-custom widget-slider-nav-next">
                             <i class="far fa-chevron-right fa-lg"></i>
                         </button>

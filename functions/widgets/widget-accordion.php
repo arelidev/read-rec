@@ -37,7 +37,7 @@ function accordion_widget_item( $atts, $content ) {
 		'title'     => '',
 	), $atts );
 
-	$slug = acf_slugify( $atts['title'] );
+	$slug = vc_slugify( $atts['title'] );
 	?>
     <li class="accordion-item accordion-item <?= $atts['el_class']; ?>" data-accordion-item>
         <a href="#<?= $slug; ?>" class="accordion-title text-color-black font-family-body"><b><?= $atts['title']; ?></b></a>

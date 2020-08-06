@@ -37,7 +37,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 		<?php if ( $checkout->get_checkout_fields() ) : ?>
 
-            <div class="small-12 medium-8 large-8 cell">
+            <div class="small-12 medium-7 large-7 cell">
 
 				<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
@@ -51,7 +51,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 		<?php endif; ?>
 
-        <div class="small-12 medium-4 large-4 cell">
+        <div class="small-12 medium-5 large-5 cell">
 
 		    <?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
 
