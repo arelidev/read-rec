@@ -18,7 +18,7 @@ function widget_event_categories( $atts, $content = null ) {
 		'taxonomy'   => 'tribe_events_cat',
 		'orderby'    => 'name',
 		'order'      => 'ASC',
-		'hide_empty' => false,
+		'hide_empty' => true,
 	) );
 	?>
     <div class="grid-x widget-event-categories <?= $atts['el_class']; ?>">

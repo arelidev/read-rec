@@ -68,7 +68,7 @@ $event_id = get_the_ID();
 		            <?php // echo tribe_events_event_schedule_details( $event_id, '<h2>', '</h2>' ); ?>
 		            <?php if ( tribe_get_cost() ) : ?>
                         <!-- .tribe-events-cost -->
-                        <p class="h2 text-color-secondary text-right font-family-body"><b><?= tribe_get_cost( null, true ) ?></b></p>
+                        <p class="h2 text-color-secondary text-right font-family-body hide"><b><?= tribe_get_cost( null, true ) ?></b></p>
 		            <?php endif; ?>
                 </div>
             </div>
