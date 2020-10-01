@@ -15,3 +15,5 @@ function sv_remove_cart_product_link( $product_link, $cart_item, $cart_item_key 
 }
 
 add_filter( 'woocommerce_cart_item_name', 'sv_remove_cart_product_link', 10, 3 );
+
+add_filter( 'woocommerce_create_account_default_checked', '__return_true' );

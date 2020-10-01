@@ -31,6 +31,13 @@
 }
 
 // CHECKOUT
+.woocommerce-checkout {
+  .tribe-checkout-backlinks {
+    .tribe-checkout-backlink {
+      margin-right: 10px;
+    }
+  }
+}
 
 // ATTENDEES
 body.page-tribe-attendee-registration {

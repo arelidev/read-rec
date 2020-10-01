@@ -4,6 +4,8 @@
  *
  * For more info: http://jointswp.com/docs/off-canvas-menu/
  */
+
+global $woocommerce;
 ?>
 
 <div class="off-canvas position-right" id="off-canvas" data-off-canvas>
@@ -27,7 +29,15 @@
 			<?php endif; ?>
         </div>
         <div class="cell">
-			<?= do_shortcode( "[social_icons_group id='" . get_field( 'header_social_icons_shortcode', 'option' ) . "']" ); ?>
+			<?//= do_shortcode( "[social_icons_group id='" . get_field( 'header_social_icons_shortcode', 'option' ) . "']" ); ?>
+            <ul class="menu">
+                <li>
+                    <a href="https://www.facebook.com/ReadingtonRecreation/"><i class="fab fa-facebook-f fa-lg"></i></a>
+                </li>
+                <li>
+                    <a href="<?= $woocommerce->cart->get_cart_url(); ?>" title="<?= __('View your shopping cart', 'woothemes'); ?>"><i class="far fa-shopping-cart fa-lg"></i></a>
+                </li>
+            </ul>
         </div>
     </div>
 

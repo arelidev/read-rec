@@ -48,7 +48,7 @@ $cart_url            = $this->get( 'cart_url' );
 	<aside id="tribe-tickets__mini-cart" <?php tribe_classes( $cart_classes ); ?> data-provider="<?php echo esc_attr( $provider_class ); ?>"  data-sticky-container>
 		<div class="sticky" data-sticky data-anchor="foo">
 			<h3 class="tribe-common-h6 tribe-common-h5--min-medium tribe-common-h--alt tribe-tickets__mini-cart__title">
-				<?php echo esc_html_x( 'Ticket Summary', 'Attendee registration mini-cart/ticket summary title.', 'event-tickets'); ?>
+				<?php echo esc_html_x( 'Sales Summary', 'Attendee registration mini-cart/ticket summary title.', 'event-tickets'); ?>
 			</h3>
 			<?php foreach ( $events as $event_id => $tickets ) : ?>
 				<?php foreach ( $tickets as $key => $ticket ) : ?>

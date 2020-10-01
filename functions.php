@@ -90,9 +90,7 @@ function tribe_change_get_tickets( $translation, $text, $context = "", $domain )
 	}
 
 	$ticket_text = [
-		// Get Tickets on List View
 		'Get %s'      => 'Register',
-		// Get Tickets Form - Single View
 		'Get Tickets' => 'Register',
 	];
 
@@ -106,8 +104,20 @@ function tribe_change_get_tickets( $translation, $text, $context = "", $domain )
 
 add_filter( 'gettext_with_context', 'tribe_change_get_tickets', 20, 4 );
 
+/**
+ * @return string
+ */
 function filter_ticket_label_plural() {
 	return 'Participants';
 }
 
 add_filter( 'tribe_get_ticket_label_plural', 'filter_ticket_label_plural' );
+
+/**
+ * @return string
+ */
+function filter_ticket_label_singular() {
+	return 'Participant';
+}
+
+add_filter( 'tribe_get_ticket_label_singular', 'filter_ticket_label_singular' );

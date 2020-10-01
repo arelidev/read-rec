@@ -4,6 +4,8 @@
  *
  * For more info: http://jointswp.com/docs/off-canvas-menu/
  */
+
+global $woocommerce;
 ?>
 
 <div class="grid-container grid-x grid-padding-x align-middle" id="top-bar-menu">
@@ -22,7 +24,14 @@
 		<?php joints_top_nav(); ?>
     </div>
     <div class="shrink cell show-for-large">
-		<?= do_shortcode( "[social_icons_group id='" . get_field( 'header_social_icons_shortcode', 'option' ) . "']" ); ?>
+        <ul class="menu">
+            <li>
+                <a href="https://www.facebook.com/ReadingtonRecreation/" class="text-color-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+            </li>
+            <li>
+                <a href="<?= $woocommerce->cart->get_cart_url(); ?>" title="<?= __('View your shopping cart', 'woothemes'); ?>" class="text-color-white"><i class="far fa-shopping-cart fa-lg"></i></a>
+            </li>
+        </ul>
     </div>
     <div class="shrink cell show-for-large">
 		<?php if ( is_user_logged_in() ) : ?>
