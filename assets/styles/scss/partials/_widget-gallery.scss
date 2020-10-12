@@ -1,0 +1,50 @@
+.widget-gallery-grid {
+  &-single-gallery {
+    margin-bottom: $global-margin;
+    padding-right: calc( #{$global-padding} / 2 );
+    padding-left: calc( #{$global-padding} / 2 );
+
+    &-inner {
+      position: relative;
+      &:after, &:before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient( to top, rgba($black, .6), rgba($black, 0));
+        pointer-events: none;
+      }
+
+      &:before {
+        background: linear-gradient( to top, rgba($black, .6), rgba($primary-color, .6));
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+
+      &:hover {
+        &:before {
+          opacity: 1;
+        }
+      }
+
+      a {
+        display: block;
+      }
+
+      img.wp-post-image {
+        width: 100%;
+      }
+
+      &-title {
+        position: absolute;
+        z-index: 2;
+        bottom: $global-margin;
+        width: 100%;
+        padding: 10px;
+      }
+    }
+  }
+}
