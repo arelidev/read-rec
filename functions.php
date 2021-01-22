@@ -35,7 +35,7 @@ require_once( get_template_directory() . '/functions/translation/translation.php
 // require_once(get_template_directory().'/functions/editor-styles.php');
 
 // Remove Emoji Support
-// require_once(get_template_directory().'/functions/disable-emoji.php');
+require_once(get_template_directory().'/functions/disable-emoji.php');
 
 // Related post function - no need to rely on plugins
 // require_once(get_template_directory().'/functions/related-posts.php');
@@ -63,61 +63,14 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 }
 
 // Add Google Maps API Key for ACF Pro
-function my_acf_init() {
-	acf_update_setting( 'google_api_key', 'AIzaSyAD-IK4EX_Dq0gEx_FvIRJBfeCsAKOwW-A' );
-}
-
 add_action( 'acf/init', 'my_acf_init' );
+function my_acf_init() {
+	acf_update_setting( 'google_api_key', 'AIzaSyBML3WPXpFj6VT-fE8QNWoO80WH-WhO-hU' );
+}
 
 // WooCommerce support
 require_once( get_template_directory() . '/functions/woocommerce.php' );
 
+// Tribe Event helpers
+require_once( get_template_directory() . '/functions/tribe-events.php' );
 
-/**
- * Change the Get Tickets on List View and Single Events
- *
- * @param string $translation The translated text.
- * @param string $text The text to translate.
- * @param string $domain The domain slug of the translated text.
- * @param string $context The option context string.
- *
- * @return string The translated text or the custom text.
- */
-function tribe_change_get_tickets( $translation, $text, $context = "", $domain ) {
-
-	if ( $domain != 'default' && strpos( $domain, 'event-' ) !== 0 ) {
-		return $translation;
-	}
-
-	$ticket_text = [
-		'Get %s'      => 'Register',
-		'Get Tickets' => 'Register',
-	];
-
-	// If we don't have replacement text, bail.
-	if ( empty( $ticket_text[ $text ] ) ) {
-		return $translation;
-	}
-
-	return $ticket_text[ $text ];
-}
-
-add_filter( 'gettext_with_context', 'tribe_change_get_tickets', 20, 4 );
-
-/**
- * @return string
- */
-function filter_ticket_label_plural() {
-	return 'Participants';
-}
-
-add_filter( 'tribe_get_ticket_label_plural', 'filter_ticket_label_plural' );
-
-/**
- * @return string
- */
-function filter_ticket_label_singular() {
-	return 'Participant';
-}
-
-add_filter( 'tribe_get_ticket_label_singular', 'filter_ticket_label_singular' );
