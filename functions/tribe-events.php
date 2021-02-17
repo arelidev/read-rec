@@ -1,128 +1,126 @@
 <?php
+
+// Register the action for the Edit order screen.
+add_filter( 'woocommerce_order_actions', 'tec_event_tickets_plus_wc_register_force_regenerate_attendees' );
+
+// Register the bulk action for the Orders screen.
+add_filter( 'bulk_actions-edit-shop_order', 'tec_event_tickets_plus_wc_register_force_regenerate_attendees' );
+
 /**
- * Change the Get Tickets on List View and Single Events
+ * Register the custom action to the list of order actions.
  *
- * @param string $translation The translated text.
- * @param string $text The text to translate.
- * @param string $domain The domain slug of the translated text.
- * @param string $context The option context string.
+ * @param array $actions List of order actions.
  *
- * @return string The translated text or the custom text.
+ * @return array List of order actions with new action registered.
  */
-function tribe_change_get_tickets( $translation, $text, $context = "", $domain ) {
-
-	if ( $domain != 'default' && strpos( $domain, 'event-' ) !== 0 ) {
-		return $translation;
-	}
-
-	$ticket_text = [
-		'Get %s'      => 'Register',
-		'Get Tickets' => 'Register',
-	];
-
-	// If we don't have replacement text, bail.
-	if ( empty( $ticket_text[ $text ] ) ) {
-		return $translation;
-	}
-
-	return $ticket_text[ $text ];
-}
-
-add_filter( 'gettext_with_context', 'tribe_change_get_tickets', 20, 4 );
-
-/**
- * @return string
- */
-function filter_ticket_label_plural() {
-	return 'Participants';
-}
-
-add_filter( 'tribe_get_ticket_label_plural', 'filter_ticket_label_plural' );
-
-/**
- * @return string
- */
-function filter_ticket_label_singular() {
-	return 'Participant';
-}
-
-add_filter( 'tribe_get_ticket_label_singular', 'filter_ticket_label_singular' );
-
-// Add page-attribute support of Events post type
-add_post_type_support( 'tribe_events', 'page-attributes' );
-
-add_filter( 'pre_get_posts', 'tribe_change_event_order' );
-function tribe_change_event_order( $query ) {
-	if ( tribe_is_list_view() ) :
-		$query->set( 'orderby', 'menu_order' );
-	endif;
-}
-
-// Add Order action
-add_filter( 'woocommerce_order_actions', 'rt_add_regenerate_action_for_et' );
-function rt_add_regenerate_action_for_et( $actions ) {
-	$actions['tribe_force_regenerate_ticket'] = __( 'Regenerate Attendees' );
+function tec_event_tickets_plus_wc_register_force_regenerate_attendees( array $actions ) {
+	$actions['tec_event_tickets_plus_wc_force_regenerate_attendees'] = __( 'Regenerate Attendees', 'event-tickets-plus' );
 
 	return $actions;
+}
+
+/**
+ * Handle regenerating of attendees for an order.
+ *
+ * @param Tribe__Tickets_Plus__Commerce__WooCommerce__Main $commerce_woo The Event Tickets Plus commerce provider for
+ *                                                                       WooCommerce.
+ * @param WC_Order $order The WooCommerce order object.
+ */
+function tec_event_tickets_plus_wc_force_regenerate_attendees_for_order( Tribe__Tickets_Plus__Commerce__WooCommerce__Main $commerce_woo, WC_Order $order ) {
+	$order_id = $order->get_id();
+
+	// Remove the flag from the order meta that indicates the attendee is already generated.
+	update_post_meta( $order_id, '_tribe_has_tickets', 0 );
+
+	$commerce_woo->generate_tickets( $order_id );
+
+	$order->add_order_note( 'Force regenerated attendees' );
 }
 
 /**
  * Regenerate action for missing attendees
  *
- * @param $order WC_Order
+ * @param $order WC_Order The WooCommerce order object.
  */
-add_action( 'woocommerce_order_action_tribe_force_regenerate_ticket', 'rt_regenerate_tickets_by_order' );
-function rt_regenerate_tickets_by_order( $order ) {
-	tribe( 'tickets-plus.commerce.woo' )->generate_tickets( $order->get_id() );
+add_action( 'woocommerce_order_action_tec_event_tickets_plus_wc_force_regenerate_attendees', static function ( WC_Order $order ) {
+	/** @var Tribe__Tickets_Plus__Commerce__WooCommerce__Main $commerce_woo */
+	$commerce_woo = tribe( 'tickets-plus.commerce.woo' );
 
-	$order->add_order_note( 'Force regenerated attendees' );
-}
+	tec_event_tickets_plus_wc_force_regenerate_attendees_for_order( $commerce_woo, $order );
+} );
 
-
-// Adding to admin order list bulk dropdown a custom action 'custom_downloads'
-add_filter( 'bulk_actions-edit-shop_order', 'downloads_bulk_actions_edit_product', 20, 1 );
-function downloads_bulk_actions_edit_product( $actions ) {
-	$actions['regenerate_attendees'] = __( 'Regenerate Attendees' );
-
-	return $actions;
-}
-
-// Make the action from selected orders
-add_filter( 'handle_bulk_actions-edit-shop_order', 'downloads_handle_bulk_action_edit_shop_order', 10, 3 );
-function downloads_handle_bulk_action_edit_shop_order( $redirect_to, $action, $post_ids ): string {
-	if ( $action !== 'regenerate_attendees' ) {
+/**
+ * Regenerate bulk action for missing attendees.
+ *
+ * @param string $redirect_to The URL to redirect to.
+ * @param string $action The bulk action name that is running.
+ * @param array $ids The list of Order ids.
+ *
+ * @return string The URL to redirect to.
+ */
+add_filter( 'handle_bulk_actions-edit-shop_order', static function ( $redirect_to, $action, $ids ) {
+	if ( 'tec_event_tickets_plus_wc_force_regenerate_attendees' !== $action ) {
 		return $redirect_to;
 	}
 
-	$processed_ids = array();
+	$ids = apply_filters( 'woocommerce_bulk_action_ids', array_reverse( array_map( 'absint', $ids ) ), $action, 'order' );
 
-	foreach ( $post_ids as $post_id ) {
-		$order = wc_get_order( $post_id );
-		tribe( 'tickets-plus.commerce.woo' )->generate_tickets( $order->get_id() );
-		$order->add_order_note( 'Force regenerated attendees' );
-		$processed_ids[] = $post_id;
+	if ( empty( $ids ) ) {
+		return $redirect_to;
 	}
 
-	return $redirect_to = add_query_arg( array(
-		'regenerate_attendees' => '1',
-		'processed_count'      => count( $processed_ids ),
-		'processed_ids'        => implode( ',', $processed_ids ),
-	), $redirect_to );
-}
+	/** @var Tribe__Tickets_Plus__Commerce__WooCommerce__Main $commerce_woo */
+	$commerce_woo = tribe( 'tickets-plus.commerce.woo' );
 
-// The results notice from bulk action on orders
-add_action( 'admin_notices', 'downloads_bulk_action_admin_notice' );
-function downloads_bulk_action_admin_notice() {
-	if ( empty( $_REQUEST['regenerate_attendees'] ) ) {
+	$changed = 0;
+
+	$report_action = 'tec_event_tickets_plus_wc_force_regenerated_attendees';
+
+	foreach ( $ids as $id ) {
+		$order = wc_get_order( $id );
+
+		if ( ! $order ) {
+			continue;
+		}
+
+		tec_event_tickets_plus_wc_force_regenerate_attendees_for_order( $commerce_woo, $order );
+
+		$changed ++;
+	}
+
+	if ( $changed ) {
+		$args = [
+			'post_type'   => $commerce_woo->order_object,
+			'bulk_action' => $report_action,
+			'changed'     => $changed,
+			'ids'         => implode( ',', $ids ),
+		];
+
+		$redirect_to = add_query_arg( $args, $redirect_to );
+	}
+
+	return $redirect_to;
+}, 9, 3 );
+
+/**
+ * Handle the admin notice success message.
+ */
+add_action( 'admin_notices', static function () {
+	global $post_type, $pagenow;
+
+	// Bail out if not on shop order list page.
+	if ( 'edit.php' !== $pagenow || 'shop_order' !== $post_type || ! isset( $_REQUEST['bulk_action'] ) ) { // WPCS: input var ok, CSRF ok.
 		return;
-	} // Exit
+	}
 
-	$count = intval( $_REQUEST['processed_count'] );
+	$number      = isset( $_REQUEST['changed'] ) ? absint( $_REQUEST['changed'] ) : 0; // WPCS: input var ok, CSRF ok.
+	$bulk_action = wc_clean( wp_unslash( $_REQUEST['bulk_action'] ) ); // WPCS: input var ok, CSRF ok.
 
-	printf( '<div id="message" class="updated fade"><p>' .
-	        _n( 'Processed %s Order.',
-		        'Processed %s Orders.',
-		        $count,
-		        'regenerate_attendees'
-	        ) . '</p></div>', $count );
-}
+	if ( 'tec_event_tickets_plus_wc_force_regenerated_attendees' !== $bulk_action ) {
+		return;
+	}
+
+	/* translators: %d: orders count */
+	$message = sprintf( _n( '%d order has had attendees regenerated.', '%d orders have had their attendees regenerated.', $number, 'event-tickets-plus' ), number_format_i18n( $number ) );
+	echo '<div class="updated"><p>' . esc_html( $message ) . '</p></div>';
+} );
