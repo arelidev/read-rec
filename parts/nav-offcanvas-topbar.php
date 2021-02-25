@@ -29,7 +29,7 @@ global $woocommerce;
                 <a href="https://www.facebook.com/ReadingtonRecreation/" class="text-color-white"><i class="fab fa-facebook-f fa-lg"></i></a>
             </li>
             <li>
-                <a href="<?= $woocommerce->cart->get_cart_url(); ?>" title="<?= __('View your shopping cart', 'woothemes'); ?>" class="text-color-white"><i class="far fa-shopping-cart fa-lg"></i></a>
+                <a href="<?= wc_get_cart_url(); ?>" title="<?= __('View your shopping cart', 'woothemes'); ?>" class="text-color-white"><i class="far fa-shopping-cart fa-lg"></i></a>
             </li>
         </ul>
     </div>
