@@ -16,17 +16,20 @@
  * @see tribe_get_event() For the format of the event object.
  */
 
-$container_classes                                                    = [
+$container_classes = [
 	'tribe-common-g-row',
 	'tribe-events-calendar-list__event-row'
 ];
+
 $container_classes['tribe-events-calendar-list__event-row--featured'] = $event->featured;
-$event_classes                                                        = tribe_get_post_class( [
+
+$event_classes = tribe_get_post_class( [
 	'tribe-events-calendar-list__event',
 	'tribe-common-g-row',
 	'tribe-common-g-row--gutters'
 ], $event->ID );
-$additional_fields                                                    = tribe_get_custom_fields();
+
+$additional_fields = tribe_get_custom_fields();
 ?>
 <div <?php tribe_classes( $container_classes ); ?>>
 
