@@ -74,3 +74,5 @@ require_once( get_template_directory() . '/functions/woocommerce.php' );
 // Tribe Event helpers
 require_once( get_template_directory() . '/functions/tribe-events.php' );
 
+// Event quick edit
+require_once( get_template_directory() . '/functions/quick-edit.php' );
