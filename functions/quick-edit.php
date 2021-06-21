@@ -120,7 +120,7 @@ function wpar_quick_edit_save( $post_id ) {
 	if ( isset( $_POST['60cf980ebae148'] ) ) {
 		update_post_meta( $post_id, '_EventHideFromUpcoming', $_POST['60cf980ebae148'] );
 	} else {
-		update_post_meta( $post_id, '_EventHideFromUpcoming', null );
+		delete_post_meta( $post_id, '_EventHideFromUpcoming' );
 	}
 }
 
