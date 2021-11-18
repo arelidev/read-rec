@@ -29,7 +29,7 @@ $event_classes = tribe_get_post_class( [
 	'tribe-common-g-row--gutters'
 ], $event->ID );
 
-$additional_fields = tribe_get_custom_fields();
+//  = tribe_get_custom_fields();
 ?>
 <div <?php tribe_classes( $container_classes ); ?>>
 
@@ -44,7 +44,7 @@ $additional_fields = tribe_get_custom_fields();
                 <header class="tribe-events-calendar-list__event-header">
                     <div class="tribe-events-calendar-list__event-datetime-wrapper tribe-common-b2">
                         <time class="tribe-events-calendar-list__event-datetime" datetime="2020-09-10">
-                            <span class="tribe-event-date-start"><?= $additional_fields['Start/End Display']; ?></span>
+                            <span class="tribe-event-date-start"><?//= $additional_fields['Start/End Display']; ?></span>
                         </time>
                     </div>
 					<?php // $this->template( 'list/event/date', [ 'event' => $event ] ); ?>
