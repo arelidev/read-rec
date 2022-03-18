@@ -85,3 +85,27 @@ function set_posts_per_page( $query ) {
 
 	return $query;
 }
+
+/**
+ * Mock REST request as frontend to load cart session
+ *
+ * Since WooCommerce 6.3.0
+ *
+ * @param bool $is_rest_api_request
+ * @return bool
+ */
+function simulate_as_not_rest($is_rest_api_request)
+{
+	if (!$is_rest_api_request) {
+		return $is_rest_api_request;
+	}
+
+	// Bail early if this is not our request.
+	if (false === strpos($_SERVER['REQUEST_URI'], '/cart')) {
+		return $is_rest_api_request;
+	}
+
+	return false;
+}
+
+add_filter('woocommerce_is_rest_api_request', 'simulate_as_not_rest');
