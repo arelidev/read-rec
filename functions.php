@@ -76,3 +76,12 @@ require_once( get_template_directory() . '/functions/tribe-events.php' );
 
 // Event quick edit
 require_once( get_template_directory() . '/functions/quick-edit.php' );
+
+add_action( 'pre_get_posts', 'set_posts_per_page' );
+function set_posts_per_page( $query ) {
+	if ( is_admin() && $_GET['page'] === 'class_reporting' ) :
+		$query->set( 'posts_per_page', - 1 );
+	endif;
+
+	return $query;
+}
