@@ -109,17 +109,3 @@ function simulate_as_not_rest($is_rest_api_request)
 }
 
 add_filter('woocommerce_is_rest_api_request', 'simulate_as_not_rest');
-
-/**
- * Allow HTML in term (category, tag) descriptions
- */
-foreach (array('pre_term_description') as $filter) {
-	remove_filter($filter, 'wp_filter_kses');
-	if (!current_user_can('unfiltered_html')) {
-		add_filter($filter, 'wp_filter_post_kses');
-	}
-}
-
-foreach (array('term_description') as $filter) {
-	remove_filter($filter, 'wp_kses_data');
-}
