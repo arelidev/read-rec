@@ -109,3 +109,45 @@ function simulate_as_not_rest($is_rest_api_request)
 }
 
 add_filter('woocommerce_is_rest_api_request', 'simulate_as_not_rest');
+
+if (is_admin()) {
+	remove_filter('pre_term_description', 'wp_filter_kses');
+	remove_filter('term_description', 'wp_kses_data');
+
+	add_filter('edit_category_form_fields', 'filter_wordpress_category_editor');
+	function filter_wordpress_category_editor($tag)
+	{
+		?>
+		<table class="form-table">
+			<tr class="form-field">
+				<th scope="row" valign="top"><label
+						for="description"><?php _ex('Description', 'Taxonomy Description'); ?></label></th>
+				<td>
+					<?php
+					$settings = array('wpautop' => true, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'description');
+					wp_editor(html_entity_decode($tag->description, ENT_QUOTES, 'UTF-8'), 'description1', $settings);
+					?>
+					<br/>
+					<span
+						class="description"><?php _e('The description is not prominent by default; however, some themes may show it.'); ?></span>
+				</td>
+			</tr>
+		</table>
+		<?php
+	}
+
+	add_action('admin_head', 'remove_default_category_description');
+	function remove_default_category_description()
+	{
+		global $current_screen;
+		if ($current_screen->id == 'edit-category') {
+			?>
+			<script type="text/javascript">
+                jQuery(function ($) {
+                    $('textarea#description').closest('tr.form-field').remove();
+                });
+			</script>
+			<?php
+		}
+	}
+}
