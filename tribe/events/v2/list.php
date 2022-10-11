@@ -36,14 +36,54 @@ if ( empty( $disable_event_search ) ) {
  * Place the following snippet in the new file within your theme wherever you
  * would like the it to display.
  */
+$program_details = get_field('program_details');
+$table = get_field( 'event_table' );
+$table_title = get_field('table_title');
 
-$description = term_description( get_queried_object_id(), 'tribe_events_cat' );
 
-if ( is_tax() && ! empty( $description ) ) :
+// $description = term_description( get_queried_object_id(), 'tribe_events_cat' );
+
+
+if ( is_tax() && ! empty( $program_details ) ) :
 	?>
     <div class="grid-container tribe-category-callout" style="margin-top: 50px; margin-bottom: -50px;">
         <div class="callout success">
-			<?= apply_filters( 'the_content', $description ); ?>
+		<?php if($program_details):?>
+	<?php echo $program_details;?>
+<?php endif;?>
+
+
+			<?php if ( ! empty ( $table, $table_title ) ) {
+echo $table_title;
+echo '<table border="1">';
+	if ( ! empty( $table['caption'] ) ) {
+		echo '<caption>' . $table['caption'] . '</caption>';
+	}
+	if ( ! empty( $table['header'] ) ) {
+		echo '<thead>';
+			echo '<tr>';
+				foreach ( $table['header'] as $th ) {
+					echo '<th>';
+						echo $th['c'];
+					echo '</th>';
+				}
+			echo '</tr>';
+		echo '</thead>';
+	}
+	echo '<tbody>';
+		foreach ( $table['body'] as $tr ) {
+			echo '<tr>';
+				foreach ( $tr as $td ) {
+					echo '<td>';
+						echo $td['c'];
+					echo '</td>';
+				}
+			echo '</tr>';
+			}
+	echo '</tbody>';
+echo '</table>';
+} ?>
+
         </div>
     </div>
 <?php endif; ?>
