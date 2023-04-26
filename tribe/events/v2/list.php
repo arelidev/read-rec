@@ -37,11 +37,13 @@ $table_title = get_field('table_title', $term);
 $description = term_description(get_queried_object_id(), 'tribe_events_cat');
 ?>
 
+<?php if (!empty($program_details)) : ?>
     <div class="grid-container tribe-category-callout" style="margin-top: 50px; margin-bottom: -50px;">
         <div class="callout success">
             <?= $program_details; ?>
         </div>
     </div>
+<?php endif; ?>
 
 <?php if (!empty ($table) && !empty($table_title)) {
     echo $table_title;
