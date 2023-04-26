@@ -34,6 +34,12 @@
         display: block;
       }
 
+      img {
+        height: 300px;
+        width: auto;
+        object-fit: cover;
+      }
+
       &-title {
         position: absolute;
         z-index: 2;
