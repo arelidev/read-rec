@@ -109,8 +109,3 @@ function simulate_as_not_rest($is_rest_api_request)
 }
 
 add_filter('woocommerce_is_rest_api_request', 'simulate_as_not_rest');
-
-add_filter('tribe_events_views_v2_view_list_repository_args', function($repository_args, $context, $view) {
-	$repository_args['orderby'] = 'menu_order';
-	return $repository_args;
-}, 10, 3);
